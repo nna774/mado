@@ -3,6 +3,7 @@ package canvas
 import (
 	"image"
 	"image/color"
+	"image/draw"
 	"syscall/js"
 
 	"github.com/nna774/mado/internal"
@@ -87,3 +88,8 @@ func (c Canvas) Set(x, y int, color color.Color) {
 	data.SetIndex(3, a>>8)
 	ctx.Call("putImageData", imageData, x, y)
 }
+
+// make sure implements
+// https://golang.org/doc/effective_go.html#blank_implements
+var _ image.Image = new(Canvas)
+var _ draw.Image = new(Canvas)
