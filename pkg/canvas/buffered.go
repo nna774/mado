@@ -60,6 +60,11 @@ func (b BufferedCanvas) Set(x, y int, color color.Color) {
 	b.buffer.Set(x, y, color)
 }
 
+// SetSize sets size
+func (b BufferedCanvas) SetSize(width, height int) {
+	b.c.SetSize(width, height)
+}
+
 // FillTestRect is test pattern
 func (b BufferedCanvas) FillTestRect() {
 	bound := b.c.rectangle.Max
