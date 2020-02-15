@@ -42,14 +42,14 @@ func (c *Canvas) SetSize(width, height int) {
 	c.rectangle.Max.Y = height
 }
 
-// Context gets canvs context
-func (c *Canvas) Context() js.Value {
+// context gets canvs context
+func (c *Canvas) context() js.Value {
 	return c.jsValue.Call("getContext", "2d")
 }
 
 // FillTestRect is test pattern
 func (c *Canvas) FillTestRect() {
-	ctx := c.Context()
+	ctx := c.context()
 	ctx.Set("fillStyle", "green")
 	ctx.Call("fillRect", 10, 10, 150, 100)
 }
@@ -66,7 +66,7 @@ func (c Canvas) Bounds() image.Rectangle {
 
 // At is part of Image interface
 func (c Canvas) At(x, y int) color.Color {
-	ctx := c.Context()
+	ctx := c.context()
 	imageData := ctx.Call("getImageData", x, y, 1, 1)
 	data := imageData.Get("data")
 	r := uint8(data.Index(0).Int())
@@ -79,7 +79,7 @@ func (c Canvas) At(x, y int) color.Color {
 // Set is part of image/draw Image interface
 func (c Canvas) Set(x, y int, color color.Color) {
 	r, g, b, a := color.RGBA()
-	ctx := c.Context()
+	ctx := c.context()
 	imageData := ctx.Call("createImageData", 1, 1)
 	data := imageData.Get("data")
 	data.SetIndex(0, r>>8)
