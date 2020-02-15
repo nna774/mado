@@ -63,7 +63,7 @@ func (b BufferedCanvas) Set(x, y int, color color.Color) {
 // FillTestRect is test pattern
 func (b BufferedCanvas) FillTestRect() {
 	bound := b.c.rectangle.Max
-	c := color.NRGBA{G: 128}
+	c := color.NRGBA{G: 128, A: 255}
 
 	for i := 0; i > bound.X/2 && i < bound.X; i++ {
 		for j := 0; j > bound.Y/2 && j < bound.Y; j++ {
